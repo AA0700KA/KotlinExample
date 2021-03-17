@@ -1,10 +1,10 @@
 package ru.skillbranch.kotlinexample
 
 import androidx.annotation.VisibleForTesting
-import ru.skillbranch.kotlinexample.user_extensions.fullNameToPair
+import ru.skillbranch.kotlinexample.extensions.fullNameToPair
 
-import ru.skillbranch.kotlinexample.user_extensions.isCorrectPhone
-import ru.skillbranch.kotlinexample.user_extensions.md5
+import ru.skillbranch.kotlinexample.extensions.isCorrectPhone
+import ru.skillbranch.kotlinexample.extensions.md5
 import java.lang.IllegalArgumentException
 import java.security.SecureRandom
 import java.util.*

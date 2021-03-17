@@ -1,8 +1,8 @@
 package ru.skillbranch.kotlinexample
 
 
-import ru.skillbranch.kotlinexample.user_extensions.fullNameToPair
-import ru.skillbranch.kotlinexample.user_extensions.isCorrectPhone
+import ru.skillbranch.kotlinexample.extensions.fullNameToPair
+import ru.skillbranch.kotlinexample.extensions.isCorrectPhone
 
 class UserHolder {
 

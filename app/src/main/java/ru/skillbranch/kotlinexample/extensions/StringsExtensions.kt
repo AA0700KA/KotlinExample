@@ -1,4 +1,4 @@
-package ru.skillbranch.kotlinexample.user_extensions
+package ru.skillbranch.kotlinexample.extensions
 
 import java.lang.IllegalArgumentException
 import java.math.BigInteger
