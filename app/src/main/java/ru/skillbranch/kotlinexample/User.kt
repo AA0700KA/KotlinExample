@@ -60,7 +60,7 @@ fullName: ${fullName}
 initials: ${initials} 
 email: ${email} 
 phone: ${phone} 
-meta: ${meta} 
+meta: ${meta}
 """.trimIndent()
     }
 
