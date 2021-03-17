@@ -49,7 +49,7 @@ class User private constructor(val firstName: String,
     var accessCode: String? = null
 
     init {
-        phone = rawPhone
+        phone = rawPhone?.replace(Regex("[\\s\\-\\(\\)]"), "")
         login = if (!phone.isNullOrBlank()) phone!! else email!!.toLowerCase()
 
         userInfo = """ 
@@ -170,6 +170,13 @@ meta: ${meta}
             val matcher = pattern.matcher(this)
             return matcher.matches()
         }
+
+        fun String.toLogin() : String =
+                if (Regex("[A-Za-z]").containsMatchIn(this))
+                    toLowerCase()
+                else
+                    replace(Regex("[\\s\\-\\(\\)]"), "")
+
 
         fun String.fullNameToPair() : Pair<String, String?> {
             return split(" ")

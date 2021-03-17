@@ -2,6 +2,7 @@ package ru.skillbranch.kotlinexample
 
 import ru.skillbranch.kotlinexample.User.Factory.fullNameToPair
 import ru.skillbranch.kotlinexample.User.Factory.isCorrectPhone
+import ru.skillbranch.kotlinexample.User.Factory.toLogin
 
 
 object UserHolder {
@@ -21,7 +22,7 @@ object UserHolder {
 
     fun registerUserByPhone(fullName : String, rawPhone : String) : User {
 
-         usersMap[rawPhone]?.let {
+         usersMap[rawPhone.replace(Regex("[\\s\\-\\(\\)]"), "")]?.let {
              throw java.lang.IllegalArgumentException("A user with this phone already exists")
          }
 
@@ -36,7 +37,7 @@ object UserHolder {
 
     fun loginUser(login : String, password: String? = null) : String? {
 
-         usersMap[login]?.let {
+         usersMap[login.toLogin()]?.let {
              if (checkPassword(it, password)) {
                  return it.userInfo
              }
@@ -50,7 +51,7 @@ object UserHolder {
 
 
     fun requestAccessCode(login: String) : Unit {
-         usersMap[login]?.let {
+         usersMap[login.toLogin()]?.let {
              it.changeAccessCode()
          }
     }
