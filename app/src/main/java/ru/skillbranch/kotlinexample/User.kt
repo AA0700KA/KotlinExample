@@ -52,14 +52,14 @@ class User private constructor(val firstName: String,
         phone = rawPhone?.replace(Regex("[\\s\\-\\(\\)]"), "")
         login = if (!phone.isNullOrBlank()) phone!! else email!!.toLowerCase()
 
-        userInfo = """ 
-firstName: ${firstName} 
-lastName: ${lastName} 
-login: ${login} 
-fullName: ${fullName} 
-initials: ${initials} 
-email: ${email} 
-phone: ${phone} 
+        userInfo = """
+firstName: ${firstName}
+lastName: ${lastName}
+login: ${login}
+fullName: ${fullName}
+initials: ${initials}
+email: ${email}
+phone: ${phone}
 meta: ${meta}
 """.trimIndent()
     }
