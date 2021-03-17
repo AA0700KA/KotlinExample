@@ -1,13 +1,13 @@
 package ru.skillbranch.kotlinexample
 
 import androidx.annotation.VisibleForTesting
-import ru.skillbranch.kotlinexample.extensions.fullNameToPair
 
-import ru.skillbranch.kotlinexample.extensions.isCorrectPhone
-import ru.skillbranch.kotlinexample.extensions.md5
 import java.lang.IllegalArgumentException
+import java.math.BigInteger
+import java.security.MessageDigest
 import java.security.SecureRandom
 import java.util.*
+import java.util.regex.Pattern
 
 class User private constructor(val firstName: String,
                                val lastName: String?,
@@ -142,7 +142,7 @@ class User private constructor(val firstName: String,
         return passwordHash.equals(encrypt(accessCode))
     }
 
-    companion object {
+    companion object Factory {
         fun makeUser(fullName: String,
                      email: String? = null,
                      password: String? = null,
@@ -156,6 +156,35 @@ class User private constructor(val firstName: String,
                 else -> throw IllegalAccessException("Email or phone must be not null or blank")
             }
 
+        }
+
+        fun String.md5() : String {
+            val md = MessageDigest.getInstance("MD5")
+            val digest = md.digest(toByteArray())
+            val hexString = BigInteger(1, digest).toString(16)
+            return hexString.padStart(32, '0')
+        }
+
+        fun String.isCorrectPhone() : Boolean {
+            val pattern = Pattern.compile("\\+\\d{11,}")
+            val matcher = pattern.matcher(this)
+            return matcher.matches()
+        }
+
+        fun String.fullNameToPair() : Pair<String, String?> {
+            return split(" ")
+                    .filter { it.isNotBlank() }
+                    .run {
+
+                        when (size) {
+                            1 -> first() to null
+                            2 -> first() to last()
+                            else -> {
+                                throw IllegalArgumentException("Fullname must be contain firstname and lastname, current result ${this}")
+                            }
+                        }
+
+                    }
         }
 
     }

@@ -1,8 +1,8 @@
 package ru.skillbranch.kotlinexample
 
+import ru.skillbranch.kotlinexample.User.Factory.fullNameToPair
+import ru.skillbranch.kotlinexample.User.Factory.isCorrectPhone
 
-import ru.skillbranch.kotlinexample.extensions.fullNameToPair
-import ru.skillbranch.kotlinexample.extensions.isCorrectPhone
 
 class UserHolder {
 
@@ -31,7 +31,7 @@ class UserHolder {
 
     }
     /*
-         accesCode generate randomly, becouse if user login into phone number password make a null
+         accessCode generate randomly, becouse if user login into phone number password make a null
      */
 
     fun loginUser(login : String, password: String? = null) : String? {
