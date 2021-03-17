@@ -38,7 +38,7 @@ object UserHolder {
     fun loginUser(login : String, password: String? = null) : String? {
 
          usersMap[login.toLogin()]?.let {
-             if (checkPassword(it, password)) {
+             if (it.checkPassword(password!!)) {
                  return it.userInfo
              }
          }

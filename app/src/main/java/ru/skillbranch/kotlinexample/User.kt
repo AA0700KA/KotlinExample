@@ -97,10 +97,10 @@ meta: ${meta}
 
     }
 
-    fun checkPassword(password: String) : Boolean {
-        val encryptData = if (accessCode.isNullOrEmpty()) encrypt(password) else encrypt(password).plus(encrypt(accessCode))
-        return encryptData.equals(passwordHash)
-    }
+    fun checkPassword(password: String) : Boolean = passwordHash.equals(encrypt(password))
+//        val encryptData = if (accessCode.isNullOrEmpty()) encrypt(password) else encrypt(password).plus(encrypt(accessCode))
+//        return encryptData.equals(passwordHash)
+
 
     fun changeAccessCode() {
         generateAccessCode()
