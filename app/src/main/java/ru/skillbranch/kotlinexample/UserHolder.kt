@@ -4,12 +4,12 @@ import ru.skillbranch.kotlinexample.User.Factory.fullNameToPair
 import ru.skillbranch.kotlinexample.User.Factory.isCorrectPhone
 
 
-class UserHolder {
+object UserHolder {
 
      val usersMap = mutableMapOf<String, User>()
 
     fun registerUser(fullName : String, email : String, password : String) : User {
-        usersMap[email]?.let {
+        usersMap[email.toLowerCase()]?.let {
             throw IllegalArgumentException("A user with this email already exists")
         }
 
