@@ -19,7 +19,9 @@ class User private constructor(val firstName: String,
     val userInfo : String
 
     val fullName: String
-        get() = "${firstName} ${lastName}"
+        get() = listOfNotNull(firstName, lastName)
+                .joinToString(" ")
+                .capitalize()
 
     val initials: String
         get() = listOfNotNull(firstName, lastName)
@@ -157,6 +159,8 @@ meta: ${meta}
             }
 
         }
+
+        fun String.nullOrCurrent() : String? = if (isEmpty()) null else this
 
         fun String.md5() : String {
             val md = MessageDigest.getInstance("MD5")

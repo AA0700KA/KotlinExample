@@ -2,6 +2,7 @@ package ru.skillbranch.kotlinexample
 
 import ru.skillbranch.kotlinexample.User.Factory.fullNameToPair
 import ru.skillbranch.kotlinexample.User.Factory.isCorrectPhone
+import ru.skillbranch.kotlinexample.User.Factory.nullOrCurrent
 import ru.skillbranch.kotlinexample.User.Factory.toLogin
 
 
@@ -38,7 +39,7 @@ object UserHolder {
     fun loginUser(login : String, password: String) : String? {
 
          usersMap[login.toLogin()]?.let {
-             if (it.checkPassword(password!!)) {
+             if (it.checkPassword(password)) {
                  return it.userInfo
              }
          }
@@ -59,11 +60,11 @@ object UserHolder {
 
             for (value in list) {
                 val stringData = value.split(";")
-                val fullName = stringData[0]
-                val email = stringData[1]
-                val salt = stringData[2].split(":")[0]
-                val passwordHash = stringData[2].split(":")[1]
-                val phone = if (stringData[3].isEmpty()) null else stringData[3]
+                val fullName = stringData[0].trim()
+                val email = stringData[1].nullOrCurrent()?.trim()
+                val salt = stringData[2].split(":")[0].trim()
+                val passwordHash = stringData[2].split(":")[1].trim()
+                val phone = stringData[3].nullOrCurrent()?.trim()
                 val (firstName, lastName) = fullName.fullNameToPair()
 
                 resultList.add(User(firstName, lastName, email, salt, passwordHash, phone).also {
