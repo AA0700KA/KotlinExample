@@ -35,7 +35,7 @@ object UserHolder {
          accessCode generate randomly, becouse if user login into phone number password make a null
      */
 
-    fun loginUser(login : String, password: String? = null) : String? {
+    fun loginUser(login : String, password: String) : String? {
 
          usersMap[login.toLogin()]?.let {
              if (it.checkPassword(password!!)) {
@@ -45,9 +45,6 @@ object UserHolder {
 
         return null
     }
-
-    private fun checkPassword(user : User, password: String?) : Boolean
-            = if (user.login.isCorrectPhone()) user.checkAccessCode() else user.checkPassword(password!!)
 
 
     fun requestAccessCode(login: String) : Unit {
